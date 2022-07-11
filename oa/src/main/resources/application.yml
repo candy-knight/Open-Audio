@@ -1,0 +1,78 @@
+#配置端口
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 21600
+
+#配置数据库
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/openaduio?serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    username: root
+    password: 1234
+    hikari:
+      ##最小空闲连接数量
+      minimum-idle: 5
+      ## 空闲连接存活最大时间，默认600000（10分钟）
+      idle-timeout: 180000
+      ## 连接池最大连接数，默认是10
+      maximum-pool-size: 10
+      ## 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      auto-commit: true
+      ## 连接池名称
+      pool-name: MyHikariCP
+      ## 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      max-lifetime: 1800000
+      ## 数据库连接超时时间,默认30秒，即30000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+  redis:
+    host:
+    port: 6379
+    password:
+
+  elasticsearch:
+    rest:
+      uris:
+        - localhost:9200
+
+
+#knife4j:
+  # 开启增强配置
+#  enable: true
+  # 开启swagger的basic认证功能，默认是false
+#  basic:
+#    enable: true
+#    username: admin
+#    password: 123
+
+
+#配置MybatisPlus
+#https://www.mybatis-plus.com/config/#configlocation
+mybatis-plus:
+  ##MyBatis Mapper 所对应的 XML 文件位置，如果您在 Mapper 中有自定义方法(XML 中有自定义实现)，需要进行该配置，告诉 Mapper 所对应的 XML 文件位置
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    #sql日志打印
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #是否开启驼峰功能
+    map-underscore-to-camel-case: true
+
+
+#配置搜索模式 elasticsearch or mysql
+search:
+  mode: mysql
+
+#文件上传 local
+upload:
+  mode: local
+  local:
+    # nginx映射本地文件路径，无域名就ip:83
+    url: http://ip:83/
+    path: /usr/local/upload/
+
+
